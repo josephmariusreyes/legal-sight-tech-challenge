@@ -1,0 +1,155 @@
+.saved-speech-list-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--surface-border);
+
+    h2 {
+      margin: 0;
+      color: var(--text-color);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+  }
+
+  .speech-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
+
+    .speech-card {
+      height: fit-content;
+      border: 1px solid var(--surface-border);
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .speech-content {
+        .speech-info {
+          margin-bottom: 1rem;
+
+          .date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+
+            i {
+              font-size: 0.8rem;
+            }
+          }
+
+          .transcript-preview {
+            p {
+              margin: 0;
+              line-height: 1.5;
+              color: var(--text-color);
+            }
+          }
+        }
+
+        .speech-actions {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: flex-end;
+          padding-top: 1rem;
+          border-top: 1px solid var(--surface-border);
+
+          ::ng-deep {
+            .p-button {
+              width: 2.5rem;
+              height: 2.5rem;
+              padding: 0;
+
+              .p-button-icon {
+                font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-speeches {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-color-secondary);
+
+    i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    h3 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+
+    p {
+      margin: 0 0 2rem 0;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .saved-speech-list-container {
+    padding: 1rem;
+
+    .header {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+
+      h2 {
+        text-align: center;
+        font-size: 1.5rem;
+      }
+    }
+
+    .speech-list {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+
+      .speech-card {
+        .speech-content {
+          .speech-actions {
+            justify-content: center;
+          }
+        }
+      }
+    }
+
+    .no-speeches {
+      padding: 2rem 1rem;
+
+      i {
+        font-size: 3rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
