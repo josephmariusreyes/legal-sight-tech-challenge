@@ -18,10 +18,12 @@ import { SpeechDashboardRoutingModule } from './speech-dashboard-routing.module'
 
 // Components
 import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
+import { SpeechListHeaderComponent } from './component/speech-list-header/speech-list-header.component';
 
 @NgModule({
   declarations: [
-    SavedSpeechListComponent
+    SavedSpeechListComponent,
+    SpeechListHeaderComponent
   ],
   imports: [
     CommonModule,
