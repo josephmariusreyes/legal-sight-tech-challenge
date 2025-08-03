@@ -1,5 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { ISpeech } from '../../../../interfaces/data/ispeech.interface';
+import { createSpeechFormGroup } from '../../../../helpers/form-helper';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ISpeechForm } from '../../../../interfaces/form/ispeechform';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-selected-speech',
@@ -8,11 +12,66 @@ import { ISpeech } from '../../../../interfaces/data/ispeech.interface';
   standalone:false,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectedSpeechComponent {
-  @Input() selectedSpeech?: ISpeech | null;
-  speechContent: string = '';
+export class SelectedSpeechComponent implements OnChanges, OnInit, OnDestroy {
 
-  ngOnChanges() {
-    this.speechContent = this.selectedSpeech?.content || '';
+  //FormGroup
+  @Input() speechFormGroup!: FormGroup<ISpeechForm>;
+  //component variables
+  subjectAreaKeywords: string[] = [];
+
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private fb:FormBuilder
+  ) {
+  }
+
+  @Output() addKeyword = new EventEmitter<void>();
+  @Output() removeKeyword = new EventEmitter<number>();
+
+  ngOnInit() {
+    this.subscribeToFormChanges();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['speechFormGroup'] && this.speechFormGroup) {
+      this.subscribeToFormChanges();
+    }
+  }
+
+  onAddSubjectAreaKeyword() {
+    this.addKeyword.emit();
+  }
+
+  onRemoveSubjectAreaKeyword(index: number) {
+    this.removeKeyword.emit(index);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private subscribeToFormChanges() {
+    if (this.speechFormGroup) {
+      // Update initial value
+      this.updateSubjectAreaKeywords();
+      
+      // Subscribe to value changes
+      this.speechFormGroup.get('subjectAreaKeywords')?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.updateSubjectAreaKeywords();
+        });
+    }
+  }
+
+  private updateSubjectAreaKeywords() {
+    const keywords = this.speechFormGroup.get('subjectAreaKeywords')?.value;
+    if (Array.isArray(keywords)) {
+      this.subjectAreaKeywords = [...keywords];
+    } else {
+      this.subjectAreaKeywords = [];
+    }
   }
 }

@@ -1,20 +1,39 @@
-<div class="selected-speech flex-fill d-flex flex-column p-4">
+<div class="selected-speech flex-fill d-flex flex-column p-4" [formGroup]="speechFormGroup">
     <div class="content-section flex-fill d-flex flex-column">
-        <p-editor [(ngModel)]="speechContent" styleClass="form-control flex-fill mb-4 bg-light" [style]="{height: '200px'}" placeholder="Speech content shown here"></p-editor>
-        
+        <h5 class="mb-3 fw-bold">Title</h5>
+        <input type="text" id="title" class="form-control mb-4" placeholder="Title" formControlName="title">
+
+        <h5 class="mb-3 fw-bold">Content</h5>
+        <p-editor formControlName="content" styleClass="form-control flex-fill mb-4 bg-white"
+            [style]="{height: '200px'}" placeholder="Speech content shown here"></p-editor>
+
         <div class="form-fields">
-            <div class="row g-3 align-items-end">
-                <div class="col-md-4">
+            <div class="row g-3 align-items-start">
+                <div class="col-md-4 h-100 d-flex flex-column">
                     <label for="author" class="form-label small fw-medium text-muted">Author</label>
-                    <input type="text" id="author" class="form-control" placeholder="Author">
+                    <input type="text" id="author" class="form-control" placeholder="Author" formControlName="author">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 h-100 d-flex flex-column">
                     <label for="subject" class="form-label small fw-medium text-muted">Subject area keywords</label>
-                    <input type="text" id="subject" class="form-control" placeholder="Subject area keywords">
+                    <div class="input-group">
+                        <input type="text" id="subject-area-keyword" class="form-control" placeholder="Subject area keywords" formControlName="newSubjectAreaKeywords">
+                        <button type="button" class="btn btn-outline-primary"
+                            (click)="onAddSubjectAreaKeyword()">Add</button>
+                    </div>
+                    <div class="current-subject-area-keywords mt-2">
+                        @for (keyword of subjectAreaKeywords; let i = $index; track keyword) {
+                        <span class="badge bg-primary me-2 mb-1 d-inline-flex align-items-center">
+                            {{ keyword }}
+                            <button type="button" class="btn-close btn-close-white btn-sm ms-2" aria-label="Remove"
+                                (click)="onRemoveSubjectAreaKeyword(i)"></button>
+                        </span>
+                        }
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="date" class="form-label small fw-medium text-muted">Date</label>
-                    <input type="date" id="date" class="form-control" value="2016-10-30">
+                <div class="col-md-4 h-100 d-flex flex-column">
+                    <label for="date" class="form-label small fw-medium text-muted">Created Date</label>
+                    <input type="text" id="date" class="form-control bg-white text-secondary"
+                        formControlName="createdDate" readonly>
                 </div>
             </div>
         </div>
