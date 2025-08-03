@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-saved-speech-actions',
@@ -8,4 +8,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SavedSpeechActionsComponent {
+
+  @Output() delete = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
+  @Output() share = new EventEmitter<void>();
+
+  onDelete(): void {
+    this.delete.emit();
+  }
+
+  onSave(): void {
+    this.save.emit();
+  }
+
+  onShare(): void {
+    this.share.emit();
+  }
 }
