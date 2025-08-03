@@ -50,4 +50,11 @@
     </div>
     
   </div>
+
+  <!-- Share Speech Dialog -->
+  <app-share-speech-dialog
+    [(visible)]="showShareDialog"
+    [selectedSpeech]="selectedSpeech"
+    (speechUpdated)="onSpeechUpdated($event)">
+  </app-share-speech-dialog>
 </div>

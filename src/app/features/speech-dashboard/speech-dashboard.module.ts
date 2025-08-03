@@ -21,6 +21,7 @@ import { SpeechDashboardRoutingModule } from './speech-dashboard-routing.module'
 import { SpeechListHeaderComponent } from './component/speech-list-header/speech-list-header.component';
 import { SelectedSpeechComponent } from './component/selected-speech/selected-speech.component';
 import { SavedSpeechActionsComponent } from './component/saved-speech-actions/saved-speech-actions.component';
+import { ShareSpeechDialogComponent } from './containers/share-speech-dialog/share-speech-dialog.component';
 import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-s
     SavedSpeechListComponent,
     SpeechListHeaderComponent,
     SelectedSpeechComponent,
-    SavedSpeechActionsComponent
+    SavedSpeechActionsComponent,
+    ShareSpeechDialogComponent
   ],
   imports: [
     CommonModule,

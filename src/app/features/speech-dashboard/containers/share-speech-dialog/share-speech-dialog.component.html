@@ -1,0 +1,86 @@
+<p-dialog 
+  header="Share Speech" 
+  [(visible)]="visible" 
+  (onHide)="onHide()"
+  [modal]="true" 
+  [style]="{ width: '500px' }"
+  [draggable]="false"
+  [resizable]="false">
+  
+  <div class="share-dialog-content">
+    <div class="mb-3">
+      <h6 class="fw-bold mb-2">Speech: {{ selectedSpeech?.title || 'Untitled' }}</h6>
+      <small class="text-muted">Author: {{ selectedSpeech?.author || 'Unknown' }}</small>
+    </div>
+
+    <div class="mb-3" [formGroup]="shareForm">
+      <label for="email-input" class="form-label small fw-medium text-muted">Email addresses</label>
+      <div class="input-group">
+        <input 
+          type="email" 
+          id="email-input"
+          class="form-control" 
+          placeholder="Enter email address"
+          formControlName="newEmail"
+          (keydown)="onEnterKeyPress($event)">
+        <button 
+          type="button" 
+          class="btn btn-outline-primary"
+          (click)="onAddEmail()">
+          Add
+        </button>
+      </div>
+      
+      <!-- Email validation error display -->
+      @if (shareForm.get('newEmail')?.invalid && shareForm.get('newEmail')?.touched) {
+        <div class="form-text text-danger">
+          Please enter a valid email address
+        </div>
+      }
+    </div>
+
+    <!-- Display added email addresses -->
+    @if (emailAddresses.length > 0) {
+      <div class="added-emails mb-3">
+        <label class="form-label small fw-medium text-muted">Recipients:</label>
+        <div class="email-badges">
+          @for (email of emailAddresses; track email; let i = $index) {
+            <span class="badge bg-primary me-2 mb-1 d-inline-flex align-items-center">
+              {{ email }}
+              <button 
+                type="button" 
+                class="btn-close btn-close-white btn-sm ms-2" 
+                aria-label="Remove"
+                (click)="onRemoveEmail(i)">
+              </button>
+            </span>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- No emails added message -->
+    @if (emailAddresses.length === 0) {
+      <div class="no-emails mb-3">
+        <small class="text-muted fst-italic">No email addresses added yet</small>
+      </div>
+    }
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="dialog-footer d-flex justify-content-end gap-2">
+      <p-button 
+        label="Cancel" 
+        icon="pi pi-times" 
+        [outlined]="true"
+        (onClick)="onHide()">
+      </p-button>
+      <p-button 
+        label="Send" 
+        icon="pi pi-send" 
+        (onClick)="onSend()"
+        [disabled]="emailAddresses.length === 0">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

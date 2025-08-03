@@ -28,6 +28,7 @@ export class SavedSpeechListComponent implements OnInit, OnDestroy {
   searchQuery: string = '';
   isNewSpeech: boolean = false;
   readyToShowPage: boolean = false;
+  showShareDialog: boolean = false;
 
   private routeSub?: Subscription;
 
@@ -254,37 +255,19 @@ export class SavedSpeechListComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Create a shareable text
-    const shareText = `Speech: ${this.selectedSpeech.title || 'Untitled'}
-Author: ${this.selectedSpeech.author || 'Unknown'}
-Created: ${this.selectedSpeech.createdDate}
-Subject Areas: ${this.selectedSpeech.subjectArea?.join(', ') || 'None'}
-
-Content:
-${this.selectedSpeech.content}`;
-
-    // Try to use the Web Share API if available
-    if (navigator.share) {
-      navigator.share({
-        title: this.selectedSpeech.title || 'Shared Speech',
-        text: shareText,
-      }).catch(err => {
-        console.log('Error sharing:', err);
-        this.fallbackShare(shareText);
-      });
-    } else {
-      this.fallbackShare(shareText);
-    }
+    this.showShareDialog = true;
   }
 
-  private fallbackShare(text: string): void {
-    // Fallback: copy to clipboard
-    navigator.clipboard.writeText(text).then(() => {
-      alert('Speech content copied to clipboard!');
-    }).catch(() => {
-      // Ultimate fallback: show text in alert
-      alert('Speech content:\n\n' + text);
-    });
+  onSpeechUpdated(updatedSpeech: ISpeech): void {
+    // Update the selected speech with the latest changes
+    this.selectedSpeech = updatedSpeech;
+    
+    // Update the speeches array to reflect the changes
+    const index = this.speeches.findIndex(speech => speech.id === updatedSpeech.id);
+    if (index !== -1) {
+      this.speeches[index] = updatedSpeech;
+      this.onSearch(); // Refresh filtered speeches
+    }
   }
 
 }
