@@ -7,34 +7,35 @@
     (click)="closeMobileMenu()"></div>
 
   <div class="main-content d-flex flex-fill overflow-hidden">
-    <div class="sidebar border-end bg-light" [class.mobile-open]="isMobileMenuOpen">
 
-      <div class="search-section p-3 border-bottom bg-white mb-1">
-        <input type="text" class="form-control mb-2" placeholder="Search all Speeches..." [(ngModel)]="searchQuery"
-          (keyup.enter)="onSearch()">
-        <button class="btn btn-primary w-100" (click)="onSearch()">Search</button>
-      </div>
-
-      <div class="speech-list py-2">
-        @for (speech of speeches; track speech.id) {
-        <a [routerLink]="['/speech-dashboard/saved-speeches', speech.id]"
-          class="d-block text-decoration-none text-dark speech-item p-3 border-bottom position-relative"
-          [class.selected]="selectedSpeech?.id === speech.id" (click)="onViewSpeech(speech.id)">
-          <div class="speech-title fw-medium text-dark mb-1">
-            {{ speech.title || 'Speech ' + speech.id }}
-          </div>
-          <div class="speech-date text-muted">
-            {{ speech.createDate | date:'short' }}
-          </div>
-        </a>
-        }
-        @empty {
-        <div class="no-speeches p-4 text-center">
-          <p class="text-muted fst-italic mb-0">No speeches found</p>
+    @if (!isNewSpeech) {
+      <div class="sidebar border-end bg-light" [class.mobile-open]="isMobileMenuOpen">
+        <div class="search-section p-3 border-bottom bg-white mb-1">
+          <input type="text" class="form-control mb-2" placeholder="Search all Speeches..." [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()">
+          <button class="btn btn-primary w-100" (click)="onSearch()">Search</button>
         </div>
-        }
+        <div class="speech-list py-2">
+          @for (speech of speeches; track speech.id) {
+          <a [routerLink]="['/speech-dashboard/saved-speeches', speech.id]"
+            class="d-block text-decoration-none text-dark speech-item p-3 border-bottom position-relative"
+            [class.selected]="selectedSpeech?.id === speech.id" (click)="onViewSpeech(speech.id)">
+            <div class="speech-title fw-medium text-dark mb-1">
+              {{ speech.title || 'Speech ' + speech.id }}
+            </div>
+            <div class="speech-date text-muted">
+              {{ speech.createDate | date:'short' }}
+            </div>
+          </a>
+          }
+          @empty {
+          <div class="no-speeches p-4 text-center">
+            <p class="text-muted fst-italic mb-0">No speeches found</p>
+          </div>
+          }
+        </div>
       </div>
-    </div>
+    }
 
     <div class="content-area flex-fill d-flex flex-column overflow-hidden">
       <app-selected-speech></app-selected-speech>

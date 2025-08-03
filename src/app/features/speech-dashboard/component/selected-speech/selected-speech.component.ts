@@ -7,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   standalone:false,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectedSpeechComponent {}
+export class SelectedSpeechComponent {
+  speechContent: string = '';
+}

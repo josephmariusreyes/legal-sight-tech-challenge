@@ -1,8 +1,6 @@
 <div class="selected-speech flex-fill d-flex flex-column p-4">
     <div class="content-section flex-fill d-flex flex-column">
-        <textarea class="form-control flex-fill mb-4 bg-light" 
-                  placeholder="Speech content shown here" 
-                  readonly></textarea>
+        <p-editor [(ngModel)]="speechContent" styleClass="form-control flex-fill mb-4 bg-light" [style]="{height: '200px'}" placeholder="Speech content shown here"></p-editor>
         
         <div class="form-fields">
             <div class="row g-3 align-items-end">

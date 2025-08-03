@@ -12,6 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { EditorModule } from 'primeng/editor';
 
 // Routing
 import { SpeechDashboardRoutingModule } from './speech-dashboard-routing.module';
@@ -45,7 +46,8 @@ import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-s
     DialogModule,
     ConfirmDialogModule,
     ToastModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    EditorModule
   ],
   providers: []
 })
