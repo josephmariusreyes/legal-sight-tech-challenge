@@ -1,42 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { SpeechDataService } from '../../../../services/speech-data.service';
+import { ISpeech } from '../../../../interfaces/data/ispeech.interface';
 
 @Component({
   selector: 'app-saved-speech-list',
   templateUrl: './saved-speech-list.component.html',
   standalone:false,
-  styleUrls: ['./saved-speech-list.component.scss']
+  styleUrls: ['./saved-speech-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SavedSpeechListComponent implements OnInit {
 
-  savedSpeeches: any[] = [];
+  selectedSpeech:ISpeech | null = null;
+  speeches: ISpeech[] = [];
 
-  constructor() { }
+  constructor(private speechDataService: SpeechDataService) { }
 
   ngOnInit(): void {
-    this.loadSavedSpeeches();
-  }
+    this.initializeAndLoadSpeeches();
 
-  loadSavedSpeeches(): void {
-    // TODO: Implement loading saved speeches from service
-    this.savedSpeeches = [
-      {
-        id: 1,
-        title: 'Sample Speech 1',
-        date: new Date(),
-        transcript: 'This is a sample speech transcript...'
-      },
-      {
-        id: 2,
-        title: 'Sample Speech 2',
-        date: new Date(),
-        transcript: 'This is another sample speech transcript...'
-      }
-    ];
+    this.speechDataService.getSpeeches().subscribe((speeches: ISpeech[]) => {
+      this.speeches = speeches;
+    });
+
+
   }
 
   onDeleteSpeech(speechId: number): void {
     // TODO: Implement delete functionality
-    this.savedSpeeches = this.savedSpeeches.filter(speech => speech.id !== speechId);
   }
 
   onEditSpeech(speechId: number): void {
@@ -48,4 +39,9 @@ export class SavedSpeechListComponent implements OnInit {
     // TODO: Implement view functionality
     console.log('View speech with ID:', speechId);
   }
+
+  private async initializeAndLoadSpeeches(): Promise<void> {
+    await this.speechDataService.initLocalStorage();
+  }
+
 }

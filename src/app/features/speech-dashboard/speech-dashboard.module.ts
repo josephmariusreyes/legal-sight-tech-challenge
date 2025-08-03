@@ -17,20 +17,25 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SpeechDashboardRoutingModule } from './speech-dashboard-routing.module';
 
 // Components
-import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
 import { SpeechListHeaderComponent } from './component/speech-list-header/speech-list-header.component';
+import { NewSpeechComponent } from './component/new-speech/new-speech.component';
+import { SelectedSpeechComponent } from './component/selected-speech/selected-speech.component';
+import { SavedSpeechActionsComponent } from './component/saved-speech-actions/saved-speech-actions.component';
+import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
 
 @NgModule({
   declarations: [
     SavedSpeechListComponent,
-    SpeechListHeaderComponent
+    SpeechListHeaderComponent,
+    SelectedSpeechComponent,
+    NewSpeechComponent,
+    SavedSpeechActionsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     SpeechDashboardRoutingModule,
-    
     // PrimeNG Modules
     ButtonModule,
     CardModule,

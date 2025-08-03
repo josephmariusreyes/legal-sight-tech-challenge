@@ -1,17 +1,11 @@
 
 
+
+import { ISpeech } from '../interfaces/data/ispeech.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-
-export interface Speech {
-  id: number;
-  title: string;
-  author: string;
-  date: string;
-  content: string;
-}
+import { catchError } from 'rxjs/operators';
 
 const LOCAL_STORAGE_KEY = 'speeches';
 
@@ -19,56 +13,66 @@ const LOCAL_STORAGE_KEY = 'speeches';
   providedIn: 'root',
 })
 export class SpeechDataService {
-  private speechesUrl = '/public/speeches.json';
+  private speechesUrl = '/speeches.json';
 
-  constructor(private http: HttpClient) {
-    this.initLocalStorage();
-  }
+  constructor(private http: HttpClient) {}
 
   // Initialize local storage with speeches.json if not already present
-  private initLocalStorage(): void {
-    if (!localStorage.getItem(LOCAL_STORAGE_KEY)) {
-      this.http.get<Speech[]>(this.speechesUrl).pipe(
-        catchError(() => of([]))
-      ).subscribe((data) => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+  async initLocalStorage(): Promise<void> {
+    const existingData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const parsedData = existingData ? JSON.parse(existingData) : null;
+    
+    if (!existingData || (Array.isArray(parsedData) && parsedData.length === 0)) {
+      return new Promise((resolve, reject) => {
+        this.http.get<ISpeech[]>(this.speechesUrl).pipe(
+          catchError(() => of([]))
+        ).subscribe({
+          next: (data) => {
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+            resolve();
+          },
+          error: (error) => {
+            reject(error);
+          }
+        });
       });
     }
+    return Promise.resolve();
   }
 
   // Helper to get speeches from local storage
-  private getSpeechesFromLocalStorage(): Speech[] {
+  private getSpeechesFromLocalStorage(): ISpeech[] {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY);
     return data ? JSON.parse(data) : [];
   }
 
   // Helper to save speeches to local storage
-  private saveSpeechesToLocalStorage(speeches: Speech[]): void {
+  private saveSpeechesToLocalStorage(speeches: ISpeech[]): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(speeches));
   }
 
   // Load all speeches
-  getSpeeches(): Observable<Speech[]> {
+  getSpeeches(): Observable<ISpeech[]> {
     return of(this.getSpeechesFromLocalStorage());
   }
 
   // Get a single speech by id
-  getSpeechById(id: number): Observable<Speech | undefined> {
+  getSpeechById(id: number): Observable<ISpeech | undefined> {
     return of(this.getSpeechesFromLocalStorage().find(s => s.id === id));
   }
 
   // Create a new speech
-  createSpeech(speech: Omit<Speech, 'id'>): Observable<Speech> {
+  createSpeech(speech: Omit<ISpeech, 'id'>): Observable<ISpeech> {
     const speeches = this.getSpeechesFromLocalStorage();
     const newId = speeches.length > 0 ? Math.max(...speeches.map(s => s.id)) + 1 : 1;
-    const newSpeech: Speech = { ...speech, id: newId };
+    const newSpeech: ISpeech = { ...speech, id: newId };
     speeches.push(newSpeech);
     this.saveSpeechesToLocalStorage(speeches);
     return of(newSpeech);
   }
 
   // Update an existing speech
-  updateSpeech(updated: Speech): Observable<Speech | undefined> {
+  updateSpeech(updated: ISpeech): Observable<ISpeech | undefined> {
     const speeches = this.getSpeechesFromLocalStorage();
     const idx = speeches.findIndex(s => s.id === updated.id);
     if (idx > -1) {
