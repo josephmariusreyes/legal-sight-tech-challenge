@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "The Power of Persistence",
+    "author": "Jane Doe",
+    "date": "2023-05-10",
+    "content": "Success is not the result of spontaneous combustion. You must set yourself on fire."
+  },
+  {
+    "id": 2,
+    "title": "Embracing Change",
+    "author": "John Smith",
+    "date": "2024-01-22",
+    "content": "Change is the only constant in life. Embrace it, and you will thrive."
+  },
+  {
+    "id": 3,
+    "title": "Unity in Diversity",
+    "author": "Aisha Khan",
+    "date": "2022-11-15",
+    "content": "Our differences make us stronger. Together, we can achieve greatness."
+  },
+  {
+    "id": 4,
+    "title": "The Value of Integrity",
+    "author": "Carlos Rivera",
+    "date": "2025-03-08",
+    "content": "Integrity is doing the right thing, even when no one is watching."
+  }
+]
