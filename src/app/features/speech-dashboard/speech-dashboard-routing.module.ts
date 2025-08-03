@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Components
 import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
-import { NewSpeechComponent } from './component/new-speech/new-speech.component';
 
 const routes: Routes = [
   {
@@ -22,16 +21,7 @@ const routes: Routes = [
   {
     path: 'saved-speeches/:id',
     component: SavedSpeechListComponent
-  },
-  {
-    path: 'new-speech',
-    component: NewSpeechComponent
-  },
-  // Add more routes here as needed
-  // {
-  //   path: 'speech/:id',
-  //   component: SpeechDetailsComponent
-  // }
+  }
 ];
 
 @NgModule({

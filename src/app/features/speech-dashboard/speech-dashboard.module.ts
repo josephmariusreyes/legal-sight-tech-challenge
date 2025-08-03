@@ -19,7 +19,6 @@ import { SpeechDashboardRoutingModule } from './speech-dashboard-routing.module'
 
 // Components
 import { SpeechListHeaderComponent } from './component/speech-list-header/speech-list-header.component';
-import { NewSpeechComponent } from './component/new-speech/new-speech.component';
 import { SelectedSpeechComponent } from './component/selected-speech/selected-speech.component';
 import { SavedSpeechActionsComponent } from './component/saved-speech-actions/saved-speech-actions.component';
 import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
@@ -29,7 +28,6 @@ import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-s
     SavedSpeechListComponent,
     SpeechListHeaderComponent,
     SelectedSpeechComponent,
-    NewSpeechComponent,
     SavedSpeechActionsComponent
   ],
   imports: [

@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { SpeechDataService } from '../../../../services/speech-data.service';
 import { ISpeech } from '../../../../interfaces/data/ispeech.interface';
 
@@ -10,25 +11,46 @@ import { ISpeech } from '../../../../interfaces/data/ispeech.interface';
   styleUrls: ['./saved-speech-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SavedSpeechListComponent implements OnInit {
+export class SavedSpeechListComponent implements OnInit, OnDestroy {
 
-  selectedSpeech:ISpeech | null = null;
+  selectedSpeech: ISpeech | null = null;
+  private routeSub?: Subscription;
   speeches: ISpeech[] = [];
   isMobileMenuOpen = false;
   searchQuery: string = '';
   isNewSpeech:boolean = false;
 
-  constructor(private speechDataService: SpeechDataService, private router: Router) { }
+  constructor(
+    private speechDataService: SpeechDataService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.initializeAndLoadSpeeches();
-
     // Set isNewSpeech based on current route
     this.isNewSpeech = this.router.url.includes('new-speech');
 
     this.speechDataService.getSpeeches().subscribe((speeches: ISpeech[]) => {
       this.speeches = speeches;
     });
+
+    // Listen for route param changes
+    this.routeSub = this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        const speechId = Number(id);
+        this.speechDataService.getSpeechById(speechId).subscribe(speech => {
+          this.selectedSpeech = speech || null;
+        });
+      } else {
+        // fallback: select first speech if available
+        this.selectedSpeech = this.speeches.length > 0 ? this.speeches[0] : null;
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    this.routeSub?.unsubscribe();
   }
 
   onSearch(): void {
