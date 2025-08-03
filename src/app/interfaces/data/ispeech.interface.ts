@@ -2,7 +2,7 @@ export interface ISpeech {
   id: number;
   title: string;
   author: string;
-  createDate: string;
+  createdDate: string;
   updatedDate: string;
   subjectArea: string[];
   shareTo: string[];
