@@ -1,3 +1,29 @@
+/* Mobile hamburger menu button */
+.mobile-menu-toggle {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.hamburger-line {
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+
+  &:nth-child(2) {
+    transform: translate(-50%, -50%) translateY(-6px);
+  }
+
+  &:nth-child(3) {
+    transform: translate(-50%, -50%) translateY(6px);
+  }
+}
+
 /* Custom hamburger animation */
 .hamburger-line.open:nth-child(1) {
   transform: translate(-50%, -50%) rotate(45deg) !important;

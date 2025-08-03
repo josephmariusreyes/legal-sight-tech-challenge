@@ -3,37 +3,27 @@
   </app-speech-list-header>
 
   <!-- Mobile menu overlay -->
-  <div class="mobile-menu-overlay position-fixed w-100 h-100" 
-       [class.active]="isMobileMenuOpen" 
-       (click)="closeMobileMenu()"
-       style="top: 0; left: 0; background: rgba(0, 0, 0, 0.5); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s ease;"
-       [style.opacity]="isMobileMenuOpen ? '1' : '0'"
-       [style.visibility]="isMobileMenuOpen ? 'visible' : 'hidden'"></div>
+  <div class="mobile-menu-overlay position-fixed w-100 h-100" [class.active]="isMobileMenuOpen"
+    (click)="closeMobileMenu()"></div>
 
   <div class="main-content d-flex flex-fill overflow-hidden">
-    <div class="sidebar border-end bg-light overflow-auto" 
-         [class.mobile-open]="isMobileMenuOpen"
-         style="width: 300px; transition: transform 0.3s ease;">
-      
+    <div class="sidebar border-end bg-light" [class.mobile-open]="isMobileMenuOpen">
+
       <div class="search-section p-3 border-bottom bg-white mb-1">
-        <input type="text" 
-               class="form-control mb-2" 
-               placeholder="Search all Speeches..." 
-               [(ngModel)]="searchQuery"
-               (keyup.enter)="onSearch()">
+        <input type="text" class="form-control mb-2" placeholder="Search all Speeches..." [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()">
         <button class="btn btn-primary w-100" (click)="onSearch()">Search</button>
       </div>
-      
+
       <div class="speech-list py-2">
         @for (speech of speeches; track speech.id) {
-        <a [routerLink]="['/speech-dashboard/saved-speeches', speech.id]" 
-           class="d-block text-decoration-none text-dark speech-item p-3 border-bottom position-relative"
-           [class.selected]="selectedSpeech?.id === speech.id" 
-           (click)="onViewSpeech(speech.id)">
-          <div class="speech-title fw-medium text-dark mb-1" style="font-size: 14px; line-height: 1.4;">
+        <a [routerLink]="['/speech-dashboard/saved-speeches', speech.id]"
+          class="d-block text-decoration-none text-dark speech-item p-3 border-bottom position-relative"
+          [class.selected]="selectedSpeech?.id === speech.id" (click)="onViewSpeech(speech.id)">
+          <div class="speech-title fw-medium text-dark mb-1">
             {{ speech.title || 'Speech ' + speech.id }}
           </div>
-          <div class="speech-date text-muted" style="font-size: 12px;">
+          <div class="speech-date text-muted">
             {{ speech.createDate | date:'short' }}
           </div>
         </a>

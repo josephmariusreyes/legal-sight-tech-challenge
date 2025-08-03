@@ -1,21 +1,16 @@
-<div class="header-tabs d-flex justify-content-between align-items-center border-bottom bg-white p-2">
+<div class="header-tabs d-flex align-items-center border-bottom bg-white p-2">
     <div class="tab-section d-flex align-items-center">
         <!-- Mobile hamburger menu button -->
-        <button class="btn btn-primary d-none mobile-menu-toggle me-3" 
-                (click)="onToggleMobileMenu()" 
-                [attr.aria-label]="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
-                style="width: 40px; height: 40px; position: relative;">
-            <span class="hamburger-line position-absolute" 
-                  [class.open]="isMobileMenuOpen"
-                  style="width: 20px; height: 2px; background: white; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all 0.3s ease;"></span>
-            <span class="hamburger-line position-absolute" 
-                  [class.open]="isMobileMenuOpen"
-                  style="width: 20px; height: 2px; background: white; top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(-6px); transition: all 0.3s ease;"></span>
-            <span class="hamburger-line position-absolute" 
-                  [class.open]="isMobileMenuOpen"
-                  style="width: 20px; height: 2px; background: white; top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(6px); transition: all 0.3s ease;"></span>
+        <button class="btn btn-primary d-none mobile-menu-toggle me-3" (click)="onToggleMobileMenu()"
+            [attr.aria-label]="isMobileMenuOpen ? 'Close menu' : 'Open menu'">
+            <span class="hamburger-line" [class.open]="isMobileMenuOpen"></span>
+            <span class="hamburger-line" [class.open]="isMobileMenuOpen"></span>
+            <span class="hamburger-line" [class.open]="isMobileMenuOpen"></span>
         </button>
-        <button class="btn btn-outline-primary tab-button active me-2">View my Speeches</button>
+        <button class="btn btn-outline-primary tab-button me-2" [routerLink]="['/speech-dashboard/saved-speeches']"
+            [ngClass]="{'active': isSavedSpeechesActive}">View my Speeches</button>
     </div>
-    <button class="btn btn-outline-secondary tab-button">Submit a new Speech</button>
+    <button class="btn btn-outline-secondary tab-button" 
+        [routerLink]="['/speech-dashboard/new-speech']"
+        [ngClass]="{'active': isNewSpeechActive}">Submit a new Speech</button>
 </div>

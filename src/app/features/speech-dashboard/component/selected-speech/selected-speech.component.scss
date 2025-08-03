@@ -1,3 +1,11 @@
+/* Speech content textarea styles */
+.content-section textarea {
+  min-height: 300px;
+  resize: vertical;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .selected-speech {

@@ -16,6 +16,10 @@ const routes: Routes = [
     component: SavedSpeechListComponent
   },
   {
+    path: 'new-speech',
+    component: SavedSpeechListComponent
+  },
+  {
     path: 'saved-speeches/:id',
     component: SavedSpeechListComponent
   },

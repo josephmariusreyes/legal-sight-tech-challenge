@@ -1,4 +1,18 @@
 /* Custom styles for speech dashboard */
+.sidebar {
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.speech-title {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.speech-date {
+  font-size: 12px;
+}
+
 .speech-item {
   cursor: pointer;
   transition: all 0.3s ease;
@@ -47,6 +61,21 @@
 }
 
 /* Mobile styles */
+.mobile-menu-overlay {
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 @media (max-width: 768px) {
   .sidebar {
     position: fixed !important;

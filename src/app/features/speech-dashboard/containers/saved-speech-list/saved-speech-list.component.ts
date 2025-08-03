@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import { SpeechDataService } from '../../../../services/speech-data.service';
 import { ISpeech } from '../../../../interfaces/data/ispeech.interface';
 
@@ -15,17 +16,19 @@ export class SavedSpeechListComponent implements OnInit {
   speeches: ISpeech[] = [];
   isMobileMenuOpen = false;
   searchQuery: string = '';
+  isNewSpeech:boolean = false;
 
-  constructor(private speechDataService: SpeechDataService) { }
+  constructor(private speechDataService: SpeechDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.initializeAndLoadSpeeches();
 
+    // Set isNewSpeech based on current route
+    this.isNewSpeech = this.router.url.includes('new-speech');
+
     this.speechDataService.getSpeeches().subscribe((speeches: ISpeech[]) => {
       this.speeches = speeches;
     });
-
-
   }
 
   onSearch(): void {
