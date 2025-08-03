@@ -3,28 +3,40 @@
     "id": 1,
     "title": "The Power of Persistence",
     "author": "Jane Doe",
-    "date": "2023-05-10",
+    "createDate": "2023-05-10T14:32:17.000Z",
+    "updatedDate": "2023-07-22T16:48:25.000Z",
+    "subjectArea": ["motivation", "success", "personal development"],
+    "shareTo": ["sarah.johnson@company.com", "mike.wilson@team.org", "lisa.brown@motivation.net"],
     "content": "Success is not the result of spontaneous combustion. You must set yourself on fire."
   },
   {
     "id": 2,
     "title": "Embracing Change",
     "author": "John Smith",
-    "date": "2024-01-22",
+    "createDate": "2024-01-22T09:45:33.000Z",
+    "updatedDate": "2024-05-15T13:22:18.000Z",
+    "subjectArea": ["change management", "adaptability", "growth"],
+    "shareTo": ["alex.garcia@business.com", "emma.davis@leadership.org"],
     "content": "Change is the only constant in life. Embrace it, and you will thrive."
   },
   {
     "id": 3,
     "title": "Unity in Diversity",
     "author": "Aisha Khan",
-    "date": "2022-11-15",
+    "createDate": "2022-11-15T18:21:09.000Z",
+    "updatedDate": "2023-02-08T20:35:51.000Z",
+    "subjectArea": ["diversity", "teamwork", "inclusion"],
+    "shareTo": ["david.martinez@hr.com", "rachel.taylor@inclusion.net", "james.anderson@diversity.org", "sofia.rodriguez@team.com"],
     "content": "Our differences make us stronger. Together, we can achieve greatness."
   },
   {
     "id": 4,
     "title": "The Value of Integrity",
     "author": "Carlos Rivera",
-    "date": "2025-03-08",
+    "createDate": "2025-03-08T11:57:42.000Z",
+    "updatedDate": "2025-06-14T08:13:29.000Z",
+    "subjectArea": ["ethics", "moral values", "character"],
+    "shareTo": ["anna.thompson@ethics.org", "robert.clark@values.com"],
     "content": "Integrity is doing the right thing, even when no one is watching."
   }
 ]
