@@ -1,31 +1,55 @@
-<div class="speech-dashboard">
-  <app-speech-list-header></app-speech-list-header>
-  
-  <div class="main-content">
-    <div class="sidebar">
-      <div class="speech-list">
+<div class="speech-dashboard min-vh-100 bg-white position-relative">
+  <app-speech-list-header [isMobileMenuOpen]="isMobileMenuOpen" (toggleMobileMenu)="toggleMobileMenu()">
+  </app-speech-list-header>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu-overlay position-fixed w-100 h-100" 
+       [class.active]="isMobileMenuOpen" 
+       (click)="closeMobileMenu()"
+       style="top: 0; left: 0; background: rgba(0, 0, 0, 0.5); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s ease;"
+       [style.opacity]="isMobileMenuOpen ? '1' : '0'"
+       [style.visibility]="isMobileMenuOpen ? 'visible' : 'hidden'"></div>
+
+  <div class="main-content d-flex flex-fill overflow-hidden">
+    <div class="sidebar border-end bg-light overflow-auto" 
+         [class.mobile-open]="isMobileMenuOpen"
+         style="width: 300px; transition: transform 0.3s ease;">
+      
+      <div class="search-section p-3 border-bottom bg-white mb-1">
+        <input type="text" 
+               class="form-control mb-2" 
+               placeholder="Search all Speeches..." 
+               [(ngModel)]="searchQuery"
+               (keyup.enter)="onSearch()">
+        <button class="btn btn-primary w-100" (click)="onSearch()">Search</button>
+      </div>
+      
+      <div class="speech-list py-2">
         @for (speech of speeches; track speech.id) {
-          <div class="speech-item" [class.selected]="selectedSpeech?.id === speech.id" (click)="onViewSpeech(speech.id)">
-            <div class="speech-title">{{ speech.title || 'Speech ' + speech.id }}</div>
-            <div class="speech-date">{{ speech.createDate | date:'short' }}</div>
+        <a [routerLink]="['/speech-dashboard/saved-speeches', speech.id]" 
+           class="d-block text-decoration-none text-dark speech-item p-3 border-bottom position-relative"
+           [class.selected]="selectedSpeech?.id === speech.id" 
+           (click)="onViewSpeech(speech.id)">
+          <div class="speech-title fw-medium text-dark mb-1" style="font-size: 14px; line-height: 1.4;">
+            {{ speech.title || 'Speech ' + speech.id }}
           </div>
+          <div class="speech-date text-muted" style="font-size: 12px;">
+            {{ speech.createDate | date:'short' }}
+          </div>
+        </a>
         }
         @empty {
-          <div class="no-speeches">
-            <p>No speeches found</p>
-          </div>
+        <div class="no-speeches p-4 text-center">
+          <p class="text-muted fst-italic mb-0">No speeches found</p>
+        </div>
         }
       </div>
     </div>
-    
-    <div class="content-area">
+
+    <div class="content-area flex-fill d-flex flex-column overflow-hidden">
       <app-selected-speech></app-selected-speech>
-      <div class="bottom-section">
+      <div class="bottom-section d-flex flex-column">
         <app-saved-speech-actions></app-saved-speech-actions>
-        <div class="note">
-          This mock-up represents the View my Speeches page<br>
-          The author would select his speech then decide to delete the speech, edit the speech or share the speech with a team member by entering the team member's email address.
-        </div>
       </div>
     </div>
   </div>

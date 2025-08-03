@@ -1,20 +1,23 @@
-<div class="selected-speech">
-    <div class="content-section">
-        <textarea class="speech-content" placeholder="Speech content shown here" readonly></textarea>
+<div class="selected-speech flex-fill d-flex flex-column p-4">
+    <div class="content-section flex-fill d-flex flex-column">
+        <textarea class="form-control flex-fill mb-4 bg-light" 
+                  placeholder="Speech content shown here" 
+                  readonly
+                  style="min-height: 300px; resize: vertical; font-size: 14px; line-height: 1.6;"></textarea>
         
         <div class="form-fields">
-            <div class="field-row">
-                <div class="field">
-                    <label for="author">Author</label>
-                    <input type="text" id="author" placeholder="Author">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label for="author" class="form-label small fw-medium text-muted">Author</label>
+                    <input type="text" id="author" class="form-control" placeholder="Author">
                 </div>
-                <div class="field">
-                    <label for="subject">Subject area keywords</label>
-                    <input type="text" id="subject" placeholder="Subject area keywords">
+                <div class="col-md-4">
+                    <label for="subject" class="form-label small fw-medium text-muted">Subject area keywords</label>
+                    <input type="text" id="subject" class="form-control" placeholder="Subject area keywords">
                 </div>
-                <div class="field date-field">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" value="2016-10-30">
+                <div class="col-md-4">
+                    <label for="date" class="form-label small fw-medium text-muted">Date</label>
+                    <input type="date" id="date" class="form-control" value="2016-10-30">
                 </div>
             </div>
         </div>

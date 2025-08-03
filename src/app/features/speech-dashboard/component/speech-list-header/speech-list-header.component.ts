@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-speech-list-header',
@@ -7,4 +7,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   standalone:false,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SpeechListHeaderComponent {}
+export class SpeechListHeaderComponent {
+  @Input() isMobileMenuOpen: boolean = false;
+  @Output() toggleMobileMenu = new EventEmitter<void>();
+  
+
+
+  onToggleMobileMenu(): void {
+    this.toggleMobileMenu.emit();
+  }
+}

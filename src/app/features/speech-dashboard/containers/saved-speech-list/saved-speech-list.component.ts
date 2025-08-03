@@ -13,6 +13,8 @@ export class SavedSpeechListComponent implements OnInit {
 
   selectedSpeech:ISpeech | null = null;
   speeches: ISpeech[] = [];
+  isMobileMenuOpen = false;
+  searchQuery: string = '';
 
   constructor(private speechDataService: SpeechDataService) { }
 
@@ -26,6 +28,12 @@ export class SavedSpeechListComponent implements OnInit {
 
   }
 
+  onSearch(): void {
+    if (this.searchQuery.trim()) {
+      // TODO: Implement search functionality
+      console.log('Searching for:', this.searchQuery);
+    }
+  }
   onDeleteSpeech(speechId: number): void {
     // TODO: Implement delete functionality
   }
@@ -38,6 +46,16 @@ export class SavedSpeechListComponent implements OnInit {
   onViewSpeech(speechId: number): void {
     // TODO: Implement view functionality
     console.log('View speech with ID:', speechId);
+    // Close mobile menu when a speech is selected
+    this.isMobileMenuOpen = false;
+  }
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
   }
 
   private async initializeAndLoadSpeeches(): Promise<void> {

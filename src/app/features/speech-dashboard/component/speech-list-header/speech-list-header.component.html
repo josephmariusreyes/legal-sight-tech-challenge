@@ -1,5 +1,21 @@
-<div class="header-tabs">
-    <button class="tab-button active">View my Speeches</button>
-    <button class="tab-button">Submit a new Speech</button>
-    <button class="tab-button">Search all Speeches</button>
+<div class="header-tabs d-flex justify-content-between align-items-center border-bottom bg-white p-2">
+    <div class="tab-section d-flex align-items-center">
+        <!-- Mobile hamburger menu button -->
+        <button class="btn btn-primary d-none mobile-menu-toggle me-3" 
+                (click)="onToggleMobileMenu()" 
+                [attr.aria-label]="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+                style="width: 40px; height: 40px; position: relative;">
+            <span class="hamburger-line position-absolute" 
+                  [class.open]="isMobileMenuOpen"
+                  style="width: 20px; height: 2px; background: white; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all 0.3s ease;"></span>
+            <span class="hamburger-line position-absolute" 
+                  [class.open]="isMobileMenuOpen"
+                  style="width: 20px; height: 2px; background: white; top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(-6px); transition: all 0.3s ease;"></span>
+            <span class="hamburger-line position-absolute" 
+                  [class.open]="isMobileMenuOpen"
+                  style="width: 20px; height: 2px; background: white; top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(6px); transition: all 0.3s ease;"></span>
+        </button>
+        <button class="btn btn-outline-primary tab-button active me-2">View my Speeches</button>
+    </div>
+    <button class="btn btn-outline-secondary tab-button">Submit a new Speech</button>
 </div>

@@ -1,98 +1,18 @@
-.selected-speech {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  
-  .content-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    
-    .speech-content {
-      flex: 1;
-      min-height: 300px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-      line-height: 1.6;
-      resize: vertical;
-      background-color: #f9f9f9;
-      
-      &:focus {
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-      }
-    }
-    
-    .form-fields {
-      .field-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr auto;
-        gap: 15px;
-        align-items: end;
-        
-        .field {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-          
-          label {
-            font-size: 13px;
-            font-weight: 500;
-            color: #555;
-          }
-          
-          input {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            
-            &:focus {
-              outline: none;
-              border-color: #007bff;
-              box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-            }
-          }
-          
-          &.date-field {
-            min-width: 150px;
-            
-            input[type="date"] {
-              width: 100%;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
+/* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .selected-speech {
-    padding: 15px;
+    padding: 1rem !important;
     
     .content-section {
-      gap: 15px;
+      gap: 1rem !important;
       
-      .speech-content {
-        min-height: 200px;
+      textarea {
+        min-height: 200px !important;
       }
       
-      .form-fields {
-        .field-row {
-          grid-template-columns: 1fr;
-          gap: 10px;
-          
-          .field {
-            &.date-field {
-              min-width: unset;
-            }
-          }
+      .row {
+        .col-md-4 {
+          margin-bottom: 1rem;
         }
       }
     }
