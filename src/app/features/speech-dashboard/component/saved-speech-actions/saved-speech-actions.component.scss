@@ -1,1 +1,83 @@
-// Component styles for saved-speech-actions
+.speech-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  
+  .action-btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    
+    &.danger {
+      background-color: #dc3545;
+      color: white;
+      
+      &:hover {
+        background-color: #c82333;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+      }
+    }
+    
+    &.success {
+      background-color: #28a745;
+      color: white;
+      
+      &:hover {
+        background-color: #218838;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+      }
+    }
+    
+    &.primary {
+      background-color: #007bff;
+      color: white;
+      
+      &:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+      }
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .speech-actions {
+    padding: 15px;
+    gap: 10px;
+    
+    .action-btn {
+      padding: 8px 20px;
+      font-size: 13px;
+      min-width: 80px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .speech-actions {
+    flex-direction: column;
+    padding: 10px;
+    gap: 8px;
+    
+    .action-btn {
+      width: 100%;
+      padding: 10px;
+      min-width: unset;
+    }
+  }
+}

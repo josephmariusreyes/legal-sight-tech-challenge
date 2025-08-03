@@ -1,1 +1,38 @@
-/* speech-list-header styles */
+.header-tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fff;
+  
+  .tab-button {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background-color: transparent;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    &.active {
+      color: #007bff;
+      border-bottom-color: #007bff;
+      background-color: #fff;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-tabs {
+    .tab-button {
+      padding: 12px 10px;
+      font-size: 12px;
+    }
+  }
+}

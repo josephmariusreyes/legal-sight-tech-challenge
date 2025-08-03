@@ -1,16 +1,32 @@
-<div>
+<div class="speech-dashboard">
   <app-speech-list-header></app-speech-list-header>
-  <div>
-    <ul>
-      @for (speech of speeches; track speech.id) {
-        <li>
-          <a [routerLink]="['/speech-dashboard/saved-speeches', speech.id]">{{ speech.title }}</a>
-        </li>
-      }
-    </ul>
-    <div>
+  
+  <div class="main-content">
+    <div class="sidebar">
+      <div class="speech-list">
+        @for (speech of speeches; track speech.id) {
+          <div class="speech-item" [class.selected]="selectedSpeech?.id === speech.id" (click)="onViewSpeech(speech.id)">
+            <div class="speech-title">{{ speech.title || 'Speech ' + speech.id }}</div>
+            <div class="speech-date">{{ speech.createDate | date:'short' }}</div>
+          </div>
+        }
+        @empty {
+          <div class="no-speeches">
+            <p>No speeches found</p>
+          </div>
+        }
+      </div>
+    </div>
+    
+    <div class="content-area">
       <app-selected-speech></app-selected-speech>
+      <div class="bottom-section">
+        <app-saved-speech-actions></app-saved-speech-actions>
+        <div class="note">
+          This mock-up represents the View my Speeches page<br>
+          The author would select his speech then decide to delete the speech, edit the speech or share the speech with a team member by entering the team member's email address.
+        </div>
+      </div>
     </div>
   </div>
-  <app-saved-speech-actions></app-saved-speech-actions>
 </div>

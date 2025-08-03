@@ -1,14 +1,22 @@
 <div class="selected-speech">
-    <textarea></textarea>
-    <div>
-        <div>
-            Author:
-        </div>
-        <div>
-            Subject area keywords:
-        </div>
-        <div>
-            <input type="date"/>
+    <div class="content-section">
+        <textarea class="speech-content" placeholder="Speech content shown here" readonly></textarea>
+        
+        <div class="form-fields">
+            <div class="field-row">
+                <div class="field">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" placeholder="Author">
+                </div>
+                <div class="field">
+                    <label for="subject">Subject area keywords</label>
+                    <input type="text" id="subject" placeholder="Subject area keywords">
+                </div>
+                <div class="field date-field">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" value="2016-10-30">
+                </div>
+            </div>
         </div>
     </div>
 </div>
