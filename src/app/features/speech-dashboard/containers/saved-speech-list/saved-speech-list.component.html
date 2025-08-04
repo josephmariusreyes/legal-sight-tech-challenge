@@ -43,6 +43,7 @@
         (removeKeyword)="onRemoveKeyword($event)"
       ></app-selected-speech>
       <app-saved-speech-actions
+        [isNewSpeech]="isNewSpeech"
         (delete)="onDeleteCurrentSpeech()"
         (save)="onSaveCurrentSpeech()"
         (share)="onShareCurrentSpeech()"

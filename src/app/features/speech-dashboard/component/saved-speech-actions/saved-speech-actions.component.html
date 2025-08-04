@@ -1,5 +1,7 @@
 <div class="speech-actions d-flex justify-content-center gap-3 p-4 border-top bg-white">
   <button class="btn btn-danger" (click)="onDelete()">Delete</button>
   <button class="btn btn-success" (click)="onSave()">Save</button>
-  <button class="btn btn-primary" (click)="onShare()">Share</button>
+  @if (!isNewSpeech) {
+    <button class="btn btn-primary" (click)="onShare()">Share</button>
+  }
 </div>
