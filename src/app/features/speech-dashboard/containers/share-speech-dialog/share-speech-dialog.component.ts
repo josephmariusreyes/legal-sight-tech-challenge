@@ -93,18 +93,15 @@ export class ShareSpeechDialogComponent implements OnChanges {
       return;
     }
 
-    // Simulate sending emails
     const emailList = emailAddresses.join(', ');
     alert(`Email sent successfully to: ${emailList}`);
     
-    // You can add actual email sending logic here
     console.log('Sending speech to:', emailAddresses);
     console.log('Speech details:', this.selectedSpeech);
   }
 
   private resetForm() {
     this.shareForm.reset();
-    // Don't clear emailAddresses here - they should persist from the speech data
   }
 
   private updateSpeechShareTo() {

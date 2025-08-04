@@ -137,7 +137,6 @@ export class SavedSpeechListComponent implements OnInit, OnDestroy {
       this.speechFormGroup.get('subjectAreaKeywords')?.setValue(keywords);
       this.speechFormGroup.get('subjectAreaKeywords')?.markAsDirty();
 
-      // Update localStorage if we have a selected speech
       if (this.selectedSpeech) {
         const updatedSpeech: ISpeech = {
           ...this.selectedSpeech,
@@ -160,7 +159,6 @@ export class SavedSpeechListComponent implements OnInit, OnDestroy {
     this.speechFormGroup.get('subjectAreaKeywords')?.setValue([...keywords]);
     this.speechFormGroup.get('subjectAreaKeywords')?.markAsDirty();
 
-    // Update localStorage if we have a selected speech
     if (this.selectedSpeech) {
       const updatedSpeech: ISpeech = {
         ...this.selectedSpeech,
@@ -184,10 +182,9 @@ export class SavedSpeechListComponent implements OnInit, OnDestroy {
     if (confirm(`Are you sure you want to delete "${this.selectedSpeech.title || 'Speech ' + this.selectedSpeech.id}"?`)) {
       this.speechDataService.deleteSpeech(this.selectedSpeech.id).subscribe(deleted => {
         if (deleted) {
-          // Navigate to the first available speech or back to main view
           this.speechDataService.getSpeeches().subscribe(speeches => {
             this.speeches = speeches;
-            this.onSearch(); // Refresh filtered speeches after deletion
+            this.onSearch();
             if (speeches.length > 0) {
               this.router.navigate(['/speech-dashboard/saved-speeches', speeches[0].id]);
             } else {
@@ -200,8 +197,33 @@ export class SavedSpeechListComponent implements OnInit, OnDestroy {
   }
 
   onSaveCurrentSpeech(): void {
-    if (!this.speechFormGroup || !this.speechFormGroup.valid) {
-      alert('Please fill in all required fields before saving');
+    if (!this.speechFormGroup) {
+      alert('Form is not initialized');
+      return;
+    }
+
+    // Mark all fields as touched to trigger validation display
+    this.speechFormGroup.markAllAsTouched();
+
+    if (!this.speechFormGroup.valid) {
+      // Create a more descriptive error message
+      const errors: string[] = [];
+      
+      if (this.speechFormGroup.get('title')?.invalid) {
+        errors.push('Title');
+      }
+      if (this.speechFormGroup.get('content')?.invalid) {
+        errors.push('Content');
+      }
+      if (this.speechFormGroup.get('author')?.invalid) {
+        errors.push('Author');
+      }
+      
+      const errorMessage = errors.length > 0 
+        ? `Please fill in the following required fields: ${errors.join(', ')}`
+        : 'Please fill in all required fields before saving';
+        
+      alert(errorMessage);
       return;
     }
 

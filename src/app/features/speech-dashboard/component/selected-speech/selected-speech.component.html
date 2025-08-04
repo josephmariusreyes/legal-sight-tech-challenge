@@ -1,17 +1,52 @@
 <div class="selected-speech flex-fill d-flex flex-column p-4" [formGroup]="speechFormGroup">
     <div class="content-section flex-fill d-flex flex-column">
-        <h5 class="mb-3 fw-bold">Title</h5>
-        <input type="text" id="title" class="form-control mb-4" placeholder="Title" formControlName="title">
+        <h5 class="mb-3 fw-bold">Title <span class="text-danger">*</span></h5>
+        <input type="text" id="title" 
+               class="form-control mb-2" 
+               [class.is-invalid]="isFieldInvalid('title')"
+               [class.is-valid]="isFieldValid('title')"
+               placeholder="Title" 
+               formControlName="title">
+        @if (isFieldInvalid('title')) {
+          <div class="invalid-feedback d-block mb-3">
+            {{ getFieldError('title') }}
+          </div>
+        } @else {
+          <div class="mb-3"></div>
+        }
 
-        <h5 class="mb-3 fw-bold">Content</h5>
-        <p-editor formControlName="content" styleClass="form-control flex-fill mb-4 bg-white"
-            [style]="{height: '200px'}" placeholder="Speech content shown here"></p-editor>
+        <h5 class="mb-3 fw-bold">Content <span class="text-danger">*</span></h5>
+        <div class="position-relative">
+          <p-editor formControlName="content" 
+                    styleClass="form-control flex-fill mb-2 bg-white"
+                    [class.is-invalid]="isFieldInvalid('content')"
+                    [class.is-valid]="isFieldValid('content')"
+                    [style]="{height: '200px'}" 
+                    placeholder="Speech content shown here"></p-editor>
+          @if (isFieldInvalid('content')) {
+            <div class="invalid-feedback d-block mb-3">
+              {{ getFieldError('content') }}
+            </div>
+          } @else {
+            <div class="mb-3"></div>
+          }
+        </div>
 
         <div class="form-fields">
             <div class="row g-3 align-items-start">
                 <div class="col-md-4 h-100 d-flex flex-column">
-                    <label for="author" class="form-label small fw-medium text-muted">Author</label>
-                    <input type="text" id="author" class="form-control" placeholder="Author" formControlName="author">
+                    <label for="author" class="form-label small fw-medium text-muted">Author <span class="text-danger">*</span></label>
+                    <input type="text" id="author" 
+                           class="form-control mb-2" 
+                           [class.is-invalid]="isFieldInvalid('author')"
+                           [class.is-valid]="isFieldValid('author')"
+                           placeholder="Author" 
+                           formControlName="author">
+                    @if (isFieldInvalid('author')) {
+                      <div class="invalid-feedback d-block">
+                        {{ getFieldError('author') }}
+                      </div>
+                    }
                 </div>
                 <div class="col-md-4 h-100 d-flex flex-column">
                     <label for="subject" class="form-label small fw-medium text-muted">Subject area keywords</label>

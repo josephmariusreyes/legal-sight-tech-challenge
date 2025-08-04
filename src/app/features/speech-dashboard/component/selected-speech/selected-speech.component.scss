@@ -6,6 +6,56 @@
   line-height: 1.6;
 }
 
+/* Enhanced validation styles */
+.form-control.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.form-control.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.form-control.is-valid {
+  border-color: #198754;
+}
+
+.form-control.is-valid:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.valid-feedback {
+  color: #198754;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* PrimeNG Editor validation styles */
+::ng-deep .p-editor-container.is-invalid .p-editor-content {
+  border-color: #dc3545 !important;
+}
+
+::ng-deep .p-editor-container.is-invalid {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+::ng-deep .p-editor-container.is-valid .p-editor-content {
+  border-color: #198754 !important;
+}
+
+/* Required field asterisk styling */
+.text-danger {
+  color: #dc3545 !important;
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .selected-speech {

@@ -47,6 +47,32 @@ export class SelectedSpeechComponent implements OnChanges, OnInit, OnDestroy {
     this.removeKeyword.emit(index);
   }
 
+  // Helper method to check if a field is invalid and touched
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.speechFormGroup?.get(fieldName);
+    return !!(field && field.invalid && field.touched);
+  }
+
+  // Helper method to check if a field is valid and touched
+  isFieldValid(fieldName: string): boolean {
+    const field = this.speechFormGroup?.get(fieldName);
+    return !!(field && field.valid && field.touched && field.value?.toString().trim());
+  }
+
+  // Helper method to get error message for a field
+  getFieldError(fieldName: string): string {
+    const field = this.speechFormGroup?.get(fieldName);
+    if (field?.errors?.['required']) {
+      switch (fieldName) {
+        case 'title': return 'Title is required';
+        case 'content': return 'Content is required';
+        case 'author': return 'Author is required';
+        default: return `${fieldName} is required`;
+      }
+    }
+    return '';
+  }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
