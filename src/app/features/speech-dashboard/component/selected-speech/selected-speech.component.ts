@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { ISpeech } from '../../../../interfaces/data/ispeech.interface';
 import { createSpeechFormGroup } from '../../../../helpers/form-helper';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -22,7 +22,8 @@ export class SelectedSpeechComponent implements OnChanges, OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -88,6 +89,14 @@ export class SelectedSpeechComponent implements OnChanges, OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
           this.updateSubjectAreaKeywords();
+          this.cdr.detectChanges();
+        });
+
+      // Subscribe to status changes for validation updates
+      this.speechFormGroup.statusChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.cdr.detectChanges();
         });
     }
   }
