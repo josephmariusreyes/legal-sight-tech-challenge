@@ -292,4 +292,9 @@ export class SavedSpeechListComponent implements OnInit, OnDestroy {
     }
   }
 
+  clearBottomContent(): void {
+    // Navigate to parent route to clear the router outlet
+    this.router.navigate([{ outlets: { primary: null } }], { relativeTo: this.route });
+  }
+
 }

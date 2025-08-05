@@ -153,3 +153,23 @@
     transition: none !important;
   }
 }
+
+/* Bottom content section styles */
+.bottom-content-section {
+  margin-top: auto; // Push to bottom
+  background-color: #fff;
+  
+  .router-outlet-container {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .btn-group .btn {
+    &.active {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+  }
+}

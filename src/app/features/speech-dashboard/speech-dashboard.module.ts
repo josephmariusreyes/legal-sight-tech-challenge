@@ -23,6 +23,7 @@ import { SelectedSpeechComponent } from './component/selected-speech/selected-sp
 import { SavedSpeechActionsComponent } from './component/saved-speech-actions/saved-speech-actions.component';
 import { ShareSpeechDialogComponent } from './containers/share-speech-dialog/share-speech-dialog.component';
 import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
+import { TestContentComponent } from './component/test-content/test-content.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-s
     SpeechListHeaderComponent,
     SelectedSpeechComponent,
     SavedSpeechActionsComponent,
-    ShareSpeechDialogComponent
+    ShareSpeechDialogComponent,
+    TestContentComponent
   ],
   imports: [
     CommonModule,

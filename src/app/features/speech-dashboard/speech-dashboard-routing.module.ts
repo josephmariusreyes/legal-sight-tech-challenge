@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Components
 import { SavedSpeechListComponent } from './containers/saved-speech-list/saved-speech-list.component';
+import { TestContentComponent } from './component/test-content/test-content.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,13 @@ const routes: Routes = [
   },
   {
     path: 'saved-speeches',
-    component: SavedSpeechListComponent
+    component: SavedSpeechListComponent,
+    children: [
+      {
+        path: 'test-path',
+        component: TestContentComponent
+      }
+    ]
   },
   {
     path: 'new-speech',
@@ -20,7 +27,13 @@ const routes: Routes = [
   },
   {
     path: 'saved-speeches/:id',
-    component: SavedSpeechListComponent
+    component: SavedSpeechListComponent,
+    children: [
+      {
+        path: 'test-path',
+        component: TestContentComponent
+      }
+    ]
   }
 ];
 

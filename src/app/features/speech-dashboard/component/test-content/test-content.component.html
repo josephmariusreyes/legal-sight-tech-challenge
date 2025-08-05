@@ -1,0 +1,20 @@
+<div class="test-content p-4">
+  <h3 class="mb-4">Test Content Section</h3>
+  <p class="text-muted mb-4">This content is loaded via router outlet in the bottom section.</p>
+  
+  <div class="row">
+    @for (item of testData; track item.id) {
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <button class="btn btn-primary btn-sm" (click)="onTestAction(item)">
+              Test Action
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

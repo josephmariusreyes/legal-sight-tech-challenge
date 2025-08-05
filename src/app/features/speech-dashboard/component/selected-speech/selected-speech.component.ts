@@ -22,7 +22,6 @@ export class SelectedSpeechComponent implements OnChanges, OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private fb:FormBuilder,
     private cdr: ChangeDetectorRef
   ) {
   }
